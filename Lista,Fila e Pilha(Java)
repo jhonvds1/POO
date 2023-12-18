@@ -1,0 +1,195 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class App {
+    public static void main(String[] args) throws Exception {
+        Lista lista = new Lista(); //Feito com a lista padrão, mas com classe para Fila e Pilha. (Só trocar aqui)
+        Scanner leitor = new Scanner(System.in);
+        int escolha;
+        do{
+        System.out.println("1 Para inserir");
+        System.out.println("2 Para remover");
+        System.out.println("3 Para ver o primeiro elemento da lista");
+        System.out.println("4 Para ver o ultimo elemento da lista");
+        System.out.println("5 para ver o tamanho da lista");
+        System.out.println("6 Para imprimir a lista\n");
+        escolha=leitor.nextInt();
+        switch(escolha){
+            case 1:
+                System.out.println("\nDigite o valor que deseja inserir");
+                int valor=leitor.nextInt();
+                lista.insere(valor);
+                break;
+            case 2:
+                lista.retira();
+                break;
+            case 3:
+                if(lista.size()>0){
+                    System.out.println("\nPrimeiro elemento:"+lista.primeiro()+"\n");
+                }else{
+                    System.out.println("\n======Lista vazia!======\n");
+                }
+                break;
+            case 4:
+                if(lista.size()>0){
+                    System.out.println("\nUltimo elemento:"+lista.ultimo()+"\n");
+                }else{
+                    System.out.println("\n======Lista vazia!======\n");
+                }
+                break;
+            case 5:
+                System.out.println("\nTamanho da lista:"+lista.size()+"\n");
+                break;
+            case 6:
+                if(lista.size()>0){
+                    lista.imprimir();
+                }else{
+                    System.out.println("\n======Lista vazia!======\n");
+                }
+                break;
+            default:
+                if(escolha!=0){
+                    System.out.println("\nOpcao invalida\n");
+                }
+            } 
+        }while(escolha!=0);
+        leitor.close();
+    }     
+}
+
+ class Lista{
+    protected ArrayList<Integer> lista;
+
+    public Lista(){
+        lista = new ArrayList<>();
+    }
+
+    public void insere(int v){
+        this.lista.add(v);
+        System.out.println("Inserido com sucesso!");
+    }   
+    
+    public void retira(){
+        if(this.lista.size()>0){
+            this.lista.remove(this.lista.size()-1);
+            System.out.println("Retirado com sucesso!");
+        }else{
+            System.out.println("Lista Vazia!");
+        }
+    }
+
+    public int primeiro(){
+        if(this.lista.size()>0){
+            return this.lista.get(0);
+        }else{
+            System.out.println("Lista vazia!");
+            return -1;
+        }
+    }
+
+    public int ultimo(){
+        if(this.lista.size()>0){
+            return this.lista.get(this.lista.size()-1);
+        }else{
+            System.out.println("Lista vazia!");
+            return -1;
+        }
+    }
+
+    public int size(){
+        return this.lista.size();
+    }
+
+    public void imprimir(){
+        for(int i=0;i<this.lista.size();i++){
+            System.out.println(this.lista.get(i));
+        }
+    }
+}
+
+class Fila extends Lista {
+    public Fila() {
+        super();
+    }        
+    public void insere(int v){
+        super.insere(v);
+        System.out.println("Inserido com Sucesso!!");
+    }
+    public void retira(){
+        if(this.lista.size()>0){
+            lista.remove(0);
+            System.out.println("Removido com sucesso!");
+        }else{
+            System.out.println("Fila vazia!");
+        }
+    }
+    public int primeiro(){
+        if(this.lista.size()>0){
+            return this.lista.get(0);
+        }else{
+            return -1;
+        }
+    }
+    public int ultimo(){
+        if(this.lista.size()>0){
+            return this.lista.get(this.lista.size()-1);
+        }else{
+            return -1;
+        }
+    }
+
+    public int size(){
+        return super.size();
+    }    
+
+    public void imprimir(){
+        super.imprimir();
+    }
+}
+
+class Pilha extends Lista{
+    public Pilha() {
+        super();
+    }        
+    
+    public void insere(int v){
+        super.insere(v);
+        System.out.println("Inserido com Sucesso!!");
+    }
+    
+    public void retira(){
+        if(this.lista.size()>0){
+            lista.remove(this.lista.size()-1);
+            System.out.println("Removido com sucesso!");
+        }else{
+            System.out.println("Pilha vazia!");
+        }
+    }
+
+    public int primeiro(){
+        if(this.lista.size()>0){
+            return this.lista.get(this.lista.size()-1);
+        }else{
+            System.out.println("Pilha vazia!");
+            return -1;
+        }
+    }
+
+    public int ultimo(){
+        if(this.lista.size()>0){
+            return this.lista.get(0);
+        }else{
+            System.out.println("Pilha vazia!");
+            return -1;
+        }
+    }
+
+    public int size(){
+        return super.size();
+    }
+
+    public void imprimir(){
+        super.imprimir();
+    }
+
+}
