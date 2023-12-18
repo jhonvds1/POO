@@ -1,0 +1,199 @@
+#include <iostream>
+#include <vector>
+
+class Lista {
+protected:
+    std::vector<int> lista;
+
+public:
+    Lista() {}
+
+    void insere(int v) {
+        this->lista.push_back(v);
+        std::cout << "Inserido com sucesso!" << std::endl;
+    }
+
+    void retira() {
+        if (this->lista.size() > 0) {
+            this->lista.pop_back();
+            std::cout << "Retirado com sucesso!" << std::endl;
+        } else {
+            std::cout << "Lista Vazia!" << std::endl;
+        }
+    }
+
+    int primeiro() {
+        if (this->lista.size() > 0) {
+            return this->lista[0];
+        } else {
+            std::cout << "Lista vazia!" << std::endl;
+            return -1;
+        }
+    }
+
+    int ultimo() {
+        if (this->lista.size() > 0) {
+            return this->lista[this->lista.size() - 1];
+        } else {
+            std::cout << "Lista vazia!" << std::endl;
+            return -1;
+        }
+    }
+
+    int size() {
+        return this->lista.size();
+    }
+
+    void imprimir() {
+        for (int i = 0; i < this->lista.size(); i++) {
+            std::cout << this->lista[i] << std::endl;
+        }
+    }
+};
+
+class Fila : public Lista {
+public:
+    Fila() : Lista() {}
+
+    void insere(int v) {
+        Lista::insere(v);
+        std::cout << "Inserido com Sucesso!!" << std::endl;
+    }
+
+    void retira() {
+        if (this->lista.size() > 0) {
+            lista.erase(lista.begin());
+            std::cout << "Removido com sucesso!" << std::endl;
+        } else {
+            std::cout << "Fila vazia!" << std::endl;
+        }
+    }
+
+    int primeiro() {
+        if (this->lista.size() > 0) {
+            return this->lista[0];
+        } else {
+            return -1;
+        }
+    }
+
+    int ultimo() {
+        if (this->lista.size() > 0) {
+            return this->lista[this->lista.size() - 1];
+        } else {
+            return -1;
+        }
+    }
+
+    int size() {
+        return Lista::size();
+    }
+
+    void imprimir() {
+        Lista::imprimir();
+    }
+};
+
+class Pilha : public Lista {
+public:
+    Pilha() : Lista() {}
+
+    void insere(int v) {
+        Lista::insere(v);
+        std::cout << "Inserido com Sucesso!!" << std::endl;
+    }
+
+    void retira() {
+        if (this->lista.size() > 0) {
+            this->lista.pop_back();
+            std::cout << "Removido com sucesso!" << std::endl;
+        } else {
+            std::cout << "Pilha vazia!" << std::endl;
+        }
+    }
+
+    int primeiro() {
+        if (this->lista.size() > 0) {
+            return this->lista[this->lista.size() - 1];
+        } else {
+            std::cout << "Pilha vazia!" << std::endl;
+            return -1;
+        }
+    }
+
+    int ultimo() {
+        if (this->lista.size() > 0) {
+            return this->lista[0];
+        } else {
+            std::cout << "Pilha vazia!" << std::endl;
+            return -1;
+        }
+    }
+
+    int size() {
+        return Lista::size();
+    }
+
+    void imprimir() {
+        Lista::imprimir();
+    }
+};
+
+int main() {
+    Lista lista;
+    int escolha;
+
+    do {
+        std::cout << "1 Para inserir" << std::endl;
+        std::cout << "2 Para remover" << std::endl;
+        std::cout << "3 Para ver o primeiro elemento da lista" << std::endl;
+        std::cout << "4 Para ver o ultimo elemento da lista" << std::endl;
+        std::cout << "5 para ver o tamanho da lista" << std::endl;
+        std::cout << "6 Para imprimir a lista" << std::endl;
+        std::cout << "0 Para sair" << std::endl;
+
+        std::cin >> escolha;
+
+        switch (escolha) {
+        case 1:
+            std::cout << "\nDigite o valor que deseja inserir" << std::endl;
+            int valor;
+            std::cin >> valor;
+            lista.insere(valor);
+            break;
+        case 2:
+            lista.retira();
+            break;
+        case 3:
+            if (lista.size() > 0) {
+                std::cout << "\nPrimeiro elemento:" << lista.primeiro() << "\n";
+            } else {
+                std::cout << "\n======Lista vazia!======\n";
+            }
+            break;
+        case 4:
+            if (lista.size() > 0) {
+                std::cout << "\nUltimo elemento:" << lista.ultimo() << "\n";
+            } else {
+                std::cout << "\n======Lista vazia!======\n";
+            }
+            break;
+        case 5:
+            std::cout << "\nTamanho da lista:" << lista.size() << "\n";
+            break;
+        case 6:
+            if (lista.size() > 0) {
+                lista.imprimir();
+            } else {
+                std::cout << "\n======Lista vazia!======\n";
+            }
+            break;
+        default:
+            if (escolha != 0) {
+                std::cout << "\nOpcao invalida\n";
+            }
+        }
+    } while (escolha != 0);
+
+    return 0;
+}
